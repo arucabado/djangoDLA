@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'dlaweb.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost:5432/mysite',        
+        default='postgres://dlaweb_db_user:YFL5yXSujknCLbnbwdXSyjYg9xpz8vsI@dpg-clj6p058td7s73c0aq80-a/dlaweb_db',        
         conn_max_age=600    
     )
 }
