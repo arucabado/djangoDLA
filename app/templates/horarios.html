@@ -1,0 +1,52 @@
+{% extends "./base.html" %}
+
+{% block title %} Horarios de juego {% endblock %}
+
+{% block body %}
+<div class="conteiner">
+    <div class="row text-center">
+        <h2>Division Latino</h2>
+        <h2>Horarios Mundiales</h2>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Nombre de usuario</th>
+                <th scope="col">Pais</th>
+                <th scope="col">Zona horaria</th>
+                <th scope="col">Hora Local</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for miembro in miembros %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{miembro.user.username}}</td>
+                {% if miembro.mostrarnombre %}
+                <td>{{ miembro.user.first_name }} {{ miembro.user.last_name }}</td>
+                {% else %}
+                <td>{{ miembro.user.username }}</td>
+                {% endif %}
+                <td>{{miembro.pais}}</td>
+                <td>{{miembro.zonah}}</td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    // JavaScript para actualizar dinámicamente la hora cada segundo
+    setInterval(function () {
+        var filas = document.querySelectorAll('tbody tr');
+
+        filas.forEach(function (fila) {
+            var zonaHoraria = fila.children[4].textContent;
+            var horaActual = new Date().toLocaleString('en-US', { timeZone: zonaHoraria });
+            fila.children[5].textContent = horaActual;
+        });
+    }, 1000);
+</script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "./base.html" %}
+
+{% block title %} Informacion de Usuario {% endblock %}
+
+{% block body %}
+<div class="row">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-dismissible alert-success face show" id="alerts">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong class="text-dark">{{ message }}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="container col-5">
+        <div class="row align-items-center">
+            <div class=" ">
+                <h2 class="fw-bold text-center py-3">Actualiza informacion usuario</h2>
+        
+                <form action="/actuser/" method="POST"> {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo electronico</label>
+                        <input type="email" class="form-control" name="email" placeholder="micorreo@correo.com.mx" value="{{ user.email }}"required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gametag" class="form-label">Gametag</label>
+                        <input type="text" class="form-control" name="gametag" placeholder="Gametag" maxlength="50">
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Mostrar Nombre</label>
+                      </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" placeholder="nombre" value="{{ user.first_name }}" maxlength="50">
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido" placeholder="apellido" value="{{ user.last_name }}"  maxlength="50">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pais" class="form-label">Pais</label>
+                        <input type="text" class="form-control" name="pais" placeholder="pais" maxlength="50">
+                    </div>
+                    <label for="zona_horaria" class="form-label">Zona horaria</label>
+                    <select class="form-select mb-3" aria-label="Default select example" name="zona_horaria">
+                        {% if datuser.zonah %}
+                        <option selected>{{datuser.zonah}}</option>
+                        {% endif %}
+                        {% for tzona in tz %}
+                        <option value="{{tzona}}">{{tzona}}</option>
+                        {% endfor%} 
+                    </select>
+                    <div class="mb-3">
+                        <label for="hora" class="form-label">Hora de juego Aprox.</label>
+                        <input type="time" class="form-control" name="hora" placeholder="00:00:00" value="{{ datuser.horai }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="duracion" class="form-label">Duracion de juego aporx. en Minutos</label>
+                        <input type="number" class="form-control" name="duracion" placeholder="0" value="{{datuser.duracion}}" min=0>
+                    </div>
+
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "./base.html" %}
+
+{% block title %} Inicio de sesion {% endblock %}
+{% load static %}
+{% block head %}
+<style>
+    .bg-login {
+       background-image: url('{% static "img/icon0.webp" %}');
+       background-position: center center ;
+   }
+   </style>
+{% endblock %}
+{% block body %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-dismissible alert-success face show" id="alerts">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong class="text-dark">{{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+<div class="container w-75 bg-white mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+      <div class="col bg-login d-none d-lg-block col-md-5 col-lg-5 col-xl-6">
+
+      </div>
+      <div class="col p-3 rounded-end">
+        <div class="text-end">
+        </div>
+        <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+        
+        <form action="/loginuser/" method="POST">{% csrf_token %}
+          <div class="mb-4">
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input type="username" class="form-control" name="username"> 
+          </div>
+          <div class ="mb-4">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+          <div class="mb-4">
+            <span>No tienes cuenta? <a href="/adduser/">Regístrate</a></span> <br>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}
