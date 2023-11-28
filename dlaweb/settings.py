@@ -90,7 +90,11 @@ WSGI_APPLICATION = 'dlaweb.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config()}
+    'default': dj_database_url.config(
+        default='postgresql://postgres:postgres@localhost:5432/mysite',        
+        conn_max_age=600    
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
