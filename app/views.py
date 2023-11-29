@@ -100,4 +100,4 @@ def horarios(request):
 @login_required        
 def logoutuser(request):
     logout(request)
-    return render(request, 'home.html   ')
+    return render(request, 'home.html')
